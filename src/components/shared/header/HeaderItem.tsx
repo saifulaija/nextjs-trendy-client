@@ -17,7 +17,7 @@ export function HeaderItems() {
       <NavigationMenuList>
         {items.map((item) => (
           <NavigationMenuItem key={item.key}>
-            <NavigationMenuTrigger className="font-semibold">
+            <NavigationMenuTrigger className="font-semibold text-gray-600">
               {item.label}
             </NavigationMenuTrigger>
             <NavigationMenuContent>

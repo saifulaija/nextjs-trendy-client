@@ -78,7 +78,7 @@ const Header = () => {
                     Find by Category
                   </div>
                   <Separator /> */}
-                 <div className="p-4"> <GlobalSearch placeholder="Search medicine......." /></div>
+                 <div className="p-4"> <GlobalSearch placeholder="Search products......." /></div>
                   {items.map((item, index) =>
                     item.key ? (
                       <>
@@ -153,7 +153,7 @@ const Header = () => {
           {/* Search and Buttons */}
           <div className="flex items-center gap-2">
             <div className="hidden md:block flex-1 max-w-lg">
-              <GlobalSearch placeholder="Search your desired products......." />
+              <GlobalSearch placeholder="Search  products......." />
             </div>
             <Button
               asChild

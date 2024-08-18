@@ -44,7 +44,7 @@ export default function GlobalSearch({ placeholder }: { placeholder: string }) {
               handleSearch(e.target.value);
             }
           }}
-          placeholder="Search blogs....."
+          placeholder={placeholder}
           className={cn(
             "w-full appearance-none bg-background pl-8 shadow-none md:w-full lg:w-full rounded-lg"
           )}
