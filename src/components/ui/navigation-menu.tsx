@@ -93,7 +93,8 @@ const NavigationMenuViewport = React.forwardRef<
       {...props}
     />
   </div>
-))
+  
+));
 NavigationMenuViewport.displayName =
   NavigationMenuPrimitive.Viewport.displayName
 
