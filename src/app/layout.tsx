@@ -8,6 +8,7 @@ import { Poppins as FontSans } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { ToastContainer } from "./nexttoast";
 import "react-toastify/dist/ReactToastify.css";
+import ReduxProviders from "@/providers/ReduxProvider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -33,14 +34,16 @@ export default function RootLayout({
         )}
       >
        
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+         <ReduxProviders>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+         </ReduxProviders>
         
         <ToastContainer />
       </body>
