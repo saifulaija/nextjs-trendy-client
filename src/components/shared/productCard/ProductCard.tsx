@@ -17,8 +17,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { TProduct } from "@/types/product.type";
+import { formateMoney } from "@/utils/formateMoney";
+import ProductSizes from "./ProductSizes";
 
 const ProductCard = ({ product }: { product: TProduct }) => {
+  console.log(product);
+  
   const router = useRouter();
   const shortTitle = truncateTitle(product?.name, 20);
 
@@ -38,6 +42,23 @@ const ProductCard = ({ product }: { product: TProduct }) => {
   const discountedPrice = Math.round(
     originalPrice - (originalPrice * discount) / 100
   ); // Round the discounted price
+
+   const sizeElements = product.sizeStockColor.map((sizeStock) => {
+     const hasStock = sizeStock.colorsStock.some(
+       (colorStock) => colorStock.quantity > 0
+     );
+     return (
+       <span
+         key={sizeStock.size}
+         className={cn(
+           "ml-2",
+           hasStock ? "text-gray-700" : "text-gray-400 line-through"
+         )}
+       >
+         {sizeStock.size}
+       </span>
+     );
+   });
 
   return (
     <Card
@@ -90,23 +111,25 @@ const ProductCard = ({ product }: { product: TProduct }) => {
         </div>
       </div>
 
-      <div className="p-2">
-        <h2 className="text-md font-medium text-gray-700 capitalize">
+      <div className="p-1">
+        <h2 className="text-md font-medium text-gray-700 capitalize mb-1">
           {shortTitle}
         </h2>
-
-        <div className="my-5">
+        <div>
+          <ProductSizes sizeStockColor={product.sizeStockColor} />
+        </div>
+        <div className="my-1">
           {discount === 0 ? (
             <p className="text-primary text-[18px] font-semibold">
-              Price: {originalPrice}৳
+              Price: {formateMoney(originalPrice)}
             </p>
           ) : (
-            <div className="flex justify-center items-center gap-4">
+            <div className="flex gap-3 items-center">
               <h5 className="text-primary text-[18px] font-semibold">
-                {discountedPrice}৳
+                {formateMoney(discountedPrice)}
               </h5>
               <h5 className="text-gray-600 text-[20px] font-semibold line-through">
-                {originalPrice}৳
+                {formateMoney(originalPrice)}
               </h5>
             </div>
           )}
