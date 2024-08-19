@@ -104,8 +104,16 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import QuickViewProduct from "../quickViewProduct/QuickViewProduct";
+import { Diff } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { TProduct } from "@/types/product.type";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product }:{product:TProduct}) => {
   const router = useRouter();
   const shortTitle = truncateTitle(product?.name, 20);
 
@@ -136,19 +144,39 @@ const ProductCard = ({ product }) => {
           height={300}
           layout="responsive"
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-primary/80 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100">
-          <Image
-            src={assets.images.addShoppingBag}
-            alt="add-shopping"
-            width={40}
-            height={40}
-            className="flex"
-            onClick={handleDetails}
-          />
+        {product?.discount && product.discount > 0 && (
+          <div className="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded">
+            {product.discount}% Off
+          </div>
+        )}
 
+        <div className="absolute hidden top-20  inset-0 group-hover:flex  items-center justify-center  transition-all duration-500 ease-in-out">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Image
+                  src={assets.images.addShoppingBag}
+                  alt="add-shopping"
+                  width={40}
+                  height={40}
+                  className="flex hover:scale-110 transition-all duration-300"
+                  onClick={handleDetails}
+                />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Select the item</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
+          {/* <Diff onClick={handleDetails} color="#811d1d" /> */}
           <div onClick={(e) => e.stopPropagation()}>
             <MyDialog
-              triggerButton={<Button className="ml-4">Quick View</Button>}
+              triggerButton={
+                <Button className="ml-4" variant="outline">
+                  Quick View
+                </Button>
+              }
             >
               <QuickViewProduct product={product} />
             </MyDialog>
