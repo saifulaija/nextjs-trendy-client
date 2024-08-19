@@ -33,7 +33,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
     e.stopPropagation();
   };
 
-  const discount = product?.discount;
+  const discount = product?.discount ?? 0; // Use 0 if discount is undefined
   const originalPrice = Math.round(product?.price); // Round the original price
   const discountedPrice = Math.round(
     originalPrice - (originalPrice * discount) / 100
@@ -55,7 +55,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
           height={300}
           layout="responsive"
         />
-        {discount && discount > 0 && (
+        {discount > 0 && (
           <div className="absolute top-2 flex justify-center items-center left-2 bg-primary h-12 w-12 text-white text-xs font-bold text-[17px] px-2 py-1 rounded-full">
             -{Math.round(discount)}%
           </div>
@@ -82,11 +82,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
 
           <div onClick={handleQuickView}>
             <MyDialog
-              triggerButton={
-                <Button className="ml-4">
-                  Quick View
-                </Button>
-              }
+              triggerButton={<Button className="ml-4">Quick View</Button>}
             >
               <QuickViewProduct product={product} />
             </MyDialog>
@@ -101,16 +97,14 @@ const ProductCard = ({ product }: { product: TProduct }) => {
 
         <div className="my-5">
           {discount === 0 ? (
-            <p className="text-secondary text-[18px] font-semibold text-primary">
+            <p className="text-primary text-[18px] font-semibold">
               Price: {originalPrice}৳
             </p>
           ) : (
             <div className="flex justify-center items-center gap-4">
-              {discount > 0 && (
-                <h5 className="text-primary text-[18px] font-semibold">
-                  {discountedPrice}৳
-                </h5>
-              )}
+              <h5 className="text-primary text-[18px] font-semibold">
+                {discountedPrice}৳
+              </h5>
               <h5 className="text-gray-600 text-[20px] font-semibold line-through">
                 {originalPrice}৳
               </h5>
