@@ -1,7 +1,6 @@
 import React from "react";
 
-
-const Loader = () => {
+const CustomLoader = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="border-gray-300 h-8 w-8 animate-spin rounded-full border-4 border-t-primary/75"></div>
@@ -9,4 +8,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default CustomLoader;

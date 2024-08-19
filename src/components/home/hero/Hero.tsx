@@ -12,6 +12,8 @@ const Hero = () => {
         sizes="100vw"
         alt="banner"
         placeholder="blur"
+        // className="transition-opacity opacity-0 duration-[2s]"
+        // onLoadingComplete={(image)=>image.classList.remove('opacity-0')}
         style={{ width: "100%", height: "auto" }}
       />
     </div>

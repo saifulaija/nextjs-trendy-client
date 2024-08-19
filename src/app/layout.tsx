@@ -33,18 +33,16 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-       
-         <ReduxProviders>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {children}
-            </ThemeProvider>
-         </ReduxProviders>
-        
+        <ReduxProviders>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </ReduxProviders>
         <ToastContainer />
       </body>
     </html>
