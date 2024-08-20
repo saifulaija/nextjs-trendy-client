@@ -645,7 +645,7 @@ export function CategoryDashboard({ children }: { children: React.ReactNode }) {
             <AuthButton />
           </div>
         </motion.header>
-        <main className="mt-20 p-4 lg:p-6">{children}</main>
+        <main className="mt-8 p-4 lg:p-6">{children}</main>
       </div>
     </div>
   );

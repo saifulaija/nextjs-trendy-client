@@ -22,14 +22,14 @@ import ProductSizes from "./ProductSizes";
 
 const ProductCard = ({ product }: { product: TProduct }) => {
   console.log(product);
-  
+
   const router = useRouter();
   const shortTitle = truncateTitle(product?.name, 20);
 
   const handleDetails = (e: any) => {
     // Prevent click event propagation to avoid conflicts with the modal
     e.stopPropagation();
-    router.push(`product/details/${product?._id}`);
+    router.push(`product/details/${product?.name}`);
   };
 
   const handleQuickView = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -43,22 +43,22 @@ const ProductCard = ({ product }: { product: TProduct }) => {
     originalPrice - (originalPrice * discount) / 100
   ); // Round the discounted price
 
-   const sizeElements = product.sizeStockColor.map((sizeStock) => {
-     const hasStock = sizeStock.colorsStock.some(
-       (colorStock) => colorStock.quantity > 0
-     );
-     return (
-       <span
-         key={sizeStock.size}
-         className={cn(
-           "ml-2",
-           hasStock ? "text-gray-700" : "text-gray-400 line-through"
-         )}
-       >
-         {sizeStock.size}
-       </span>
-     );
-   });
+  const sizeElements = product.sizeStockColor.map((sizeStock) => {
+    const hasStock = sizeStock.colorsStock.some(
+      (colorStock) => colorStock.quantity > 0
+    );
+    return (
+      <span
+        key={sizeStock.size}
+        className={cn(
+          "ml-2",
+          hasStock ? "text-gray-700" : "text-gray-400 line-through"
+        )}
+      >
+        {sizeStock.size}
+      </span>
+    );
+  });
 
   return (
     <Card
