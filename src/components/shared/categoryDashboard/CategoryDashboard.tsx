@@ -481,7 +481,7 @@ export function CategoryDashboard({ children }: { children: React.ReactNode }) {
                     {item.children.map((child) => (
                       <Link
                         key={child.key}
-                        href={`/product/category/${child.key}`}
+                        href={`/product-category/${item.key}/${child.key}`}
                         className={cn(
                           "flex items-center justify-between gap-3 px-3 py-2 text-muted-foreground transition-all hover:text-primary",
                           pathname === child.key &&
