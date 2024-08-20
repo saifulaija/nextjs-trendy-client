@@ -39,7 +39,7 @@ body {
 }
 
 .mySwiper2 {
-  height: 60%;
+  height: 40%; /* Decreased height */
   width: 100%;
 }
 
@@ -53,6 +53,7 @@ body {
   width: 25%;
   height: 100%;
   opacity: 0.4;
+  cursor: pointer; /* Ensure pointer is visible even on active slide */
 }
 
 .mySwiper .swiper-slide-thumb-active {
@@ -65,4 +66,9 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.swiper-slide img:hover {
+  transform: scale(1.05); /* Add a slight zoom effect on hover for interactivity */
 }

@@ -21,7 +21,7 @@ const ProductSizes = ({ sizeStockColor }: { sizeStockColor: SizeStock[] }) => {
             disabled={totalQuantity === 0}
             variant="outline"
             key={sizeData.size}
-            className={`text-gray-600 font-semibold ${
+            className={`text-gray-600  font-semibold ${
               totalQuantity === 0
                 ? "line-through text-gray-600 font-semibold cursor-not-allowed"
                 : ""
