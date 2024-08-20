@@ -199,10 +199,6 @@
 
 // export default Header;
 
-
-
-
-
 "use client";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -229,6 +225,7 @@ import GlobalSearch from "../globalSearch/GlobalSearch";
 import Image from "next/image";
 import { TextAlignCenterIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
+import AuthButton from "../authButton/AuthButton";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -372,31 +369,7 @@ const Header = () => {
               </Link>
             </Button>
 
-            {user ? (
-              <Button
-                onClick={handleLogout}
-                asChild
-                className="cursor-pointer group"
-              >
-                <span className="flex items-center gap-2">
-                  Logout
-                  <LogOut className="transition-transform duration-300 ease-in-out transform group-hover:translate-x-1" />
-                </span>
-              </Button>
-            ) : (
-              <Button
-                asChild
-                variant="outline"
-                className="hover:bg-primary text-gray-400 hover:text-white px-2 py-1 hover:transition-all hover:duration-200"
-              >
-                <Link
-                  href="/signin"
-                  className="flex items-center font-semibold"
-                >
-                  <User className="font-semibold" />
-                </Link>
-              </Button>
-            )}
+            <AuthButton />
           </div>
         </header>
       </div>
@@ -405,4 +378,3 @@ const Header = () => {
 };
 
 export default Header;
-
