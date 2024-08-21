@@ -16,8 +16,8 @@ const fontSans = FontSans({
   variable: "--font-sans",
 });
 export const metadata: Metadata = {
-  title: "BlogPlex App",
-  description: "An BlogPlex built with Next.js, Postgres, Shadcn",
+  title: "Trendy | Home",
+  description: "An Trendy built with Next.js, Shadcn",
 };
 
 export default function RootLayout({

@@ -19,8 +19,9 @@ import {
 import { TProduct } from "@/types/product.type";
 import { formateMoney } from "@/utils/formateMoney";
 import ProductSizes from "./ProductSizes";
+import Link from "next/link";
 
-const ProductCard = ({ product }: { product: TProduct }) => {
+const CategoryProductCard = ({ product }: { product: TProduct }) => {
   console.log(product);
 
   const router = useRouter();
@@ -29,12 +30,13 @@ const ProductCard = ({ product }: { product: TProduct }) => {
   const handleDetails = (e: any) => {
     // Prevent click event propagation to avoid conflicts with the modal
     e.stopPropagation();
-    router.push(`product/details/${product?.name}`);
+    // router.replace(`product/details/${product?._id}`);
   };
 
   const handleQuickView = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     // Prevent click event propagation to avoid triggering the onClick for the card
     e.stopPropagation();
+    e.preventDefault()
   };
 
   const discount = product?.discount ?? 0; // Use 0 if discount is undefined
@@ -61,8 +63,9 @@ const ProductCard = ({ product }: { product: TProduct }) => {
   });
 
   return (
-    <Card
-      onClick={handleDetails}
+    <Link
+    href={`/product/details/${product?._id}`}
+      // onClick={handleDetails}
       className={cn(
         "group mx-auto w-72 transform overflow-hidden hover:cursor-pointer rounded-lg shadow-md"
       )}
@@ -135,8 +138,8 @@ const ProductCard = ({ product }: { product: TProduct }) => {
           )}
         </div>
       </div>
-    </Card>
+    </Link>
   );
 };
 
-export default ProductCard;
+export default CategoryProductCard;

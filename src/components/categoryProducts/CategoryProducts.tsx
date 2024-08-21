@@ -15,6 +15,7 @@ import ProductCardSkeleton from "./ProductCardSkeleton";
 import { TProduct } from "@/types/product.type";
 import ProductCard from "../shared/productCard/ProductCard";
 import { NoData } from "../shared/noData/NoData";
+import ProductCategoryCard from "../shared/productCard/CategoryProductCard";
 
 const CategoryProducts = ({
   category,
@@ -85,7 +86,7 @@ const CategoryProducts = ({
             ) : (data?.Products?.length ?? 0) > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
                 {data?.Products?.map((product: TProduct) => (
-                  <ProductCard product={product} key={product._id} />
+                  <ProductCategoryCard product={product} key={product._id} />
                 ))}
               </div>
             ) : (

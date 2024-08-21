@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const ProductDetailsPage = ({params}:TParams) => {
   return (
     <div>
-      <ProductDetails id={params.productId} />
+      <ProductDetails  />
     </div>
   );
 };

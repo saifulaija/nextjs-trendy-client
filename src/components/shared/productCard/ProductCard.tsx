@@ -30,6 +30,8 @@ const ProductCard = ({ product }: { product: TProduct }) => {
     // Prevent click event propagation to avoid conflicts with the modal
     e.stopPropagation();
     router.push(`product/details/${product?._id}`);
+
+   
   };
 
   const handleQuickView = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

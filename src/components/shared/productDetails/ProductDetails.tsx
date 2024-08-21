@@ -241,12 +241,17 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button"; // Assuming you have a Button component
+import { useParams } from "next/navigation";
 
 interface ProductDetailsProps {
   id: string;
 }
 
-const ProductDetails = ({ id }: ProductDetailsProps) => {
+const ProductDetails = () => {
+  const params=useParams();
+  const id=params.productId;
+  console.log(id);
+  
   const { data, isLoading } = useGetSingleProductQuery(id);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
