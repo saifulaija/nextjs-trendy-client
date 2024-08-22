@@ -238,15 +238,22 @@ const Header = () => {
     // Handle logout logic here
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+const [xOffset, setXOffset] = useState<number>(0);
+
+useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setXOffset(10); // Move 10px when scrolled down
+    } else {
+      setXOffset(0); // Reset to original position when scrolled back to top
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
 
   return (
     <div
@@ -318,10 +325,27 @@ const Header = () => {
               </SheetContent>
             </Sheet>
 
-            <motion.div
+            {/* <motion.div
               className="hidden md:flex"
               whileHover={{ x: 10 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            >
+              <div className="flex items-center">
+                <Link href="/">
+                  <Image
+                    src={assets.images.logo}
+                    alt="logo"
+                    width={60}
+                    height={60}
+                    className="rounded"
+                  />
+                </Link>
+              </div>
+            </motion.div> */}
+            <motion.div
+              className="hidden md:flex"
+              animate={{ x: xOffset }} // Apply xOffset based on scroll
+              transition={{ type: "spring", stiffness: 200, damping: 20 }} // Smooth transition
             >
               <div className="flex items-center">
                 <Link href="/">

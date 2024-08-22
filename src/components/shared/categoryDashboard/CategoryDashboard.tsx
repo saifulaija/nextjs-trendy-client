@@ -70,15 +70,22 @@ export function CategoryDashboard({ children }: { children: React.ReactNode }) {
     },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+const [xOffset, setXOffset] = useState<number>(0);
+
+useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setXOffset(10); // Move 10px when scrolled down
+    } else {
+      setXOffset(0); // Reset to original position when scrolled back to top
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -86,41 +93,10 @@ export function CategoryDashboard({ children }: { children: React.ReactNode }) {
       <div className="hidden border-r  md:block">
         <div className="flex h-full max-h-screen flex-col gap-2 fixed w-[280px]">
           <div className="flex h-14 items-center border-b py-4 px-4 lg:h-[60px] lg:px-6">
-            {/* <Link href="/" className="flex items-center gap-2 font-semibold">
-              <Image
-                src={assets.images.logo}
-                width={40}
-                height={40}
-                alt="logo"
-                className="rounded-md mr-1"
-              />
-            </Link> */}
-            {/* <motion.div
-              className="hidden md:flex"
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            >
-              <div className="flex items-center">
-                <Link href="/">
-                  <Image
-                    src={assets.images.logo}
-                    alt="logo"
-                    width={60}
-                    height={60}
-                    className="rounded"
-                  />
-                </Link>
-              </div>
-            </motion.div> */}
             <motion.div
-              className={cn(
-                "hidden md:flex fixed",
-                scrolled
-                  ? "top-0 left-0 z-50 bg-white w-full shadow-md"
-                  : "md:relative"
-              )}
-              whileHover={scrolled ? { x: 10 } : undefined}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              className="hidden md:flex"
+              animate={{ x: xOffset }} // Apply xOffset based on scroll
+              transition={{ type: "spring", stiffness: 200, damping: 20 }} // Smooth transition
             >
               <div className="flex items-center">
                 <Link href="/">
