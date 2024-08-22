@@ -1,56 +1,117 @@
+import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 import { TProduct } from "@/types/product.type";
-import Image from "next/image";
+import { formateMoney } from "@/utils/formateMoney";
+import Link from "next/link";
 import React from "react";
+import ReactImageMagnify from "react-image-magnify";
 
 const QuickViewProduct = ({ product }: { product: TProduct }) => {
-  const discount = 20; // Example discount percentage
-  const originalPrice = 25.0; // Example original price
+  const discount = product?.discount || 0;
+  const originalPrice = product?.price || 0;
   const discountedPrice = originalPrice - (originalPrice * discount) / 100;
 
   return (
-    <Card className="p-4 shadow-lg rounded-lg">
-      <div className="relative w-full overflow-hidden group rounded-lg">
-        <Image
-          className="object-cover object-center transition-transform duration-500 ease-in-out transform group-hover:scale-110"
-          src={product?.images[0]}
-          alt="Product Image"
-          width={500}
-          height={300}
-          layout="responsive"
+    <Card className="flex flex-col md:flex-row items-start md:items-center relative m-2">
+      {/* Product Image with Magnification */}
+      <div className="relative w-full md:w-auto">
+        <ReactImageMagnify
+          {...{
+            smallImage: {
+              alt: "Wristwatch by Ted Baker London",
+              isFluidWidth: true,
+              src: product?.images?.[0] || "/placeholder-image.png",
+            },
+            largeImage: {
+              src: product?.images?.[0] || "/placeholder-image.png",
+              width: 640,
+              height: 480,
+            },
+          }}
         />
-
-        {/* Discount Badge */}
-        <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-          {discount}% Off
-        </div>
-
-        {/* Product Tag */}
-        <div className="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">
-          New Arrival
-        </div>
       </div>
 
-      <div className="mt-4">
-        <h2 className="text-lg font-medium text-gray-900 capitalize">
-          {product.name}
-        </h2>
-        <p className="text-sm text-gray-500 mt-1">{product.description}</p>
-
-        <div className="flex items-center mt-3">
-          <p className="text-lg font-semibold text-gray-900 dark:text-white">
-            ${discountedPrice.toFixed(2)}
-          </p>
-          <p className="ml-2 text-base font-medium text-gray-500 line-through dark:text-gray-300">
-            ${originalPrice.toFixed(2)}
-          </p>
-          <p className="ml-auto text-base font-medium text-primary">20% off</p>
+      {/* Product Details */}
+      <div className="mt-4 md:mt-0 flex flex-col justify-between w-full">
+        <div className="py-5 flex justify-evenly items-center">
+          <h4 className="text-lg md:text-xl text-center font-semibold text-primary capitalize mb-0">
+            {product?.name || "Product Name"}
+          </h4>
         </div>
 
+        <Separator />
+
+        <div className="flex justify-between items-center px-10 py-1">
+          <p className="text-gray-600 font-semibold text-md">Price</p>
+          <p className="text-end text-md font-semibold text-gray-500">
+            {formateMoney(originalPrice)}
+          </p>
+        </div>
+
+        {discount > 0 && (
+          <>
+            <Separator />
+            <div className="flex justify-between items-center px-10 py-1">
+              <p className="text-gray-600 font-semibold text-md">Discount</p>
+              <p className="text-end text-md font-semibold text-red-500">
+                -{discount}%
+              </p>
+            </div>
+            <Separator />
+            <div className="flex justify-between items-center px-10 py-1">
+              <p className="text-gray-600 font-semibold text-md">Save Amount</p>
+              <p className="text-end text-md font-semibold text-red-500">
+                {formateMoney(originalPrice - discountedPrice)}
+              </p>
+            </div>
+            <Separator />
+            <div className="flex justify-between items-center px-10 py-1">
+              <p className="text-gray-600 font-semibold text-md">Net Price</p>
+              <p className="text-end text-md font-semibold text-red-500">
+                {formateMoney(discountedPrice)}
+              </p>
+            </div>
+          </>
+        )}
+
+        <Separator />
+
+        <div className="flex justify-between items-center px-10 py-1">
+          <p className="text-gray-600 font-semibold text-md">Category</p>
+          <p className="text-end text-md font-semibold text-gray-500 capitalize">
+            {product?.category || "Category"}
+          </p>
+        </div>
+
+        <Separator />
+
+        <div className="flex justify-between items-center px-10 py-1">
+          <p className="text-gray-600 font-semibold text-md">Sub Category</p>
+          <p className="text-end text-md font-semibold text-gray-500 capitalize">
+            {product?.subCategory || "Sub Category"}
+          </p>
+        </div>
+
+        <Separator />
+
+        <div className="flex justify-between items-center px-10 py-1">
+          <p className="text-gray-600 font-semibold text-md">Tag:</p>
+          <p className="text-end text-sm text-gray-500">
+            {product?.tag || "Tag"}
+          </p>
+        </div>
+
+        <Separator />
+
         {/* Order Now Button */}
-        <button className="mt-4 w-full bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded transition duration-300">
+        <Link
+          href={`product/details/${product?._id}`}
+          className={cn(buttonVariants(), "mt-4 md:mt-20 rounded-none")}
+        >
           Order Now
-        </button>
+        </Link>
       </div>
     </Card>
   );
