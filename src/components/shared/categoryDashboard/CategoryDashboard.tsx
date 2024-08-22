@@ -533,8 +533,8 @@ export function CategoryDashboard({ children }: { children: React.ReactNode }) {
           <header
            
             className={cn(
-              "flex justify-between h-14 items-center fixed top-0 left-0 md:left-[280px] right-0 z-50 gap-4 border-b px-4 lg:h-[60px] lg:px-6",
-              scrolled ? "bg-opacity-90 border-b backdrop-blur-xl" : ""
+              "flex justify-between h-14 items-center bg-white fixed top-0 left-0 md:left-[280px] right-0 z-50 gap-4 border-b px-4 lg:h-[60px] lg:px-6",
+              scrolled ? "bg-opacity-100 border-b " : ""
             )}
           >
             <Sheet>
