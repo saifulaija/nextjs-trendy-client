@@ -53,6 +53,8 @@ import { BestSellingCarousel } from "./BestSellingCarousel";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link"; // Import the Next.js Link component
+import ButtonShopAll from "@/components/shared/buttonShopAll/ButtonShopAll";
+import { cn } from "@/lib/utils";
 
 const BestSellingProducts = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -74,15 +76,24 @@ const BestSellingProducts = () => {
       </div>
 
       <div className="flex justify-center items-center mt-5">
-        <Button asChild className="group">
+        <Button
+          asChild
+          className={cn(
+            "group bg-white border-2 border-red-600 text-primary duration-300 ease-in-out transition-all hover:text-white"
+          )}
+        >
           <Link href="/shop">
-            <span className="flex items-center gap-2">
-              <span className="font-semibold tracking-wide">Shop All</span>
+            <span className="flex items-center">
+              <span className="font-semibold tracking-wide uppercase">
+                Shop All
+              </span>
               <ChevronRight className="transition-transform duration-300 ease-in-out transform group-hover:translate-x-1" />
             </span>
           </Link>
         </Button>
       </div>
+
+      {/* <ButtonShopAll/> */}
 
       <div className="flex-1 border-b-2 border-l-2 border-r-2 border-primary h-10 -mt-4"></div>
     </div>

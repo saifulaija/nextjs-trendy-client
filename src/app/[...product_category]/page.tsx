@@ -21,7 +21,7 @@ const CategoryCatchAllPage = ({ params, searchParams }: TParams) => {
 
   return (
     <div className="mt-5">
-      {/* <TagBlogs tag={tag} q={q} /> */}
+     
       <CategoryProducts searchTerm={searchTerm} category={category}/>
 
      

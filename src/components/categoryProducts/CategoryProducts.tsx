@@ -16,6 +16,7 @@ import { TProduct } from "@/types/product.type";
 import ProductCard from "../shared/productCard/ProductCard";
 import { NoData } from "../shared/noData/NoData";
 import ProductCategoryCard from "../shared/productCard/CategoryProductCard";
+import CustomLoader from "../shared/customLoader/CustomLoader";
 
 const CategoryProducts = ({
   category,
@@ -47,13 +48,14 @@ const CategoryProducts = ({
             <Slash />
           </BreadcrumbSeparator>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/blogs">Blogs</BreadcrumbLink>
+            <BreadcrumbPage>product</BreadcrumbPage>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
             <Slash />
           </BreadcrumbSeparator>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/blogs/tags">Tag</BreadcrumbLink>
+        
+            <BreadcrumbPage>category</BreadcrumbPage>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
             <Slash />
@@ -78,11 +80,7 @@ const CategoryProducts = ({
           </div>
           <div className="w-full">
             {isLoading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-                {Array.from({ length: 8 }).map((_, index) => (
-                  <ProductCardSkeleton key={index} />
-                ))}
-              </div>
+             <CustomLoader/>
             ) : (data?.Products?.length ?? 0) > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
                 {data?.Products?.map((product: TProduct) => (
